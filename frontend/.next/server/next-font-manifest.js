@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/linkr.psh/Desktop/don-jjul/frontend/src/app/layout\":[\"static/media/659df64606270f52-s.p.woff2\",\"static/media/ebfe4f524cbef140-s.p.woff2\",\"static/media/6d6b84086d5e99f1-s.p.woff2\",\"static/media/df3bfb9215b6902e-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"

@@ -6,9 +6,9 @@ import lombok.ToString;
 @Getter
 @ToString
 public class TokenDto {
-    private String grantType;
-    private String accessToken;
-    private long accessTokenExpiresIn;
+    private final String grantType;
+    private final String accessToken;
+    private final long accessTokenExpiresIn;
 
     public static TokenDto of(String grantType, String accessToken, long accessTokenExpiresIn) {
         return new TokenDto(grantType, accessToken, accessTokenExpiresIn);

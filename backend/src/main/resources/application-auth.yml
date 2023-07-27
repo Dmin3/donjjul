@@ -1,0 +1,3 @@
+kakao:
+  key: 617d25249e0e4962aac1a228b396bb3b
+  redirect-url: http://localhost:8080/oauth

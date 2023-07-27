@@ -38,3 +38,5 @@ out/
 
 ### 제외 할 파일 ###
 application-jwt.yml
+application-auth.yml
+

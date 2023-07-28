@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 
-import '@/styles/globals.css';
 import { NotoSans } from '@/styles/font';
+import StyledComponentsRegistry from '@/styles/registry';
+import Providers from '@/lib/tanstack-Query/provider';
 
 export const metadata: Metadata = {
   title: '돈쭐',
@@ -15,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={NotoSans.className}>{children}</body>
+      <body className={NotoSans.className}>
+        <StyledComponentsRegistry>
+          <Providers>{children}</Providers>
+        </StyledComponentsRegistry>
+      </body>
     </html>
   );
 }

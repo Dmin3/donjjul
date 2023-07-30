@@ -2,7 +2,6 @@ package social.donjjul.auth;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import social.donjjul.auth.kakao.KakaoAuthService;
 import social.donjjul.auth.kakao.KakaoUserInfoDto;
@@ -20,14 +19,17 @@ public class AuthService {
     private final KakaoAuthService kakaoAuthService;
     private final MemberRepository memberRepository;
 
-    public KakaoUserInfoDto login(String code) {
+    public KakaoUserInfoDto authKakao(String code) {
         String accessToken = kakaoAuthService.getKakaoAccessToken(code);
         KakaoUserInfoDto kakaoUserInfo = kakaoAuthService.getKakaoUserInfo(accessToken);
 
         Optional<Member> findMember = memberRepository.findById(kakaoUserInfo.getId());
 
-        return findMember.isEmpty() ? kakaoUserInfo : null;
+        if (findMember.isPresent()) {
+            kakaoUserInfo.setJoinStatus(true);
+            return kakaoUserInfo;
+        }
+
+        return kakaoUserInfo;
     }
-
-
 }

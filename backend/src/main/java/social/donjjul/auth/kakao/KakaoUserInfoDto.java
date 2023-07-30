@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 public class KakaoUserInfoDto {
     private String id;
     private Properties properties;
+    // 가입 여부
+    private boolean joinStatus;
+
+    public void setJoinStatus(boolean joinStatus) {
+        this.joinStatus = joinStatus;
+    }
 
     public KakaoUserInfoDto(String id, Properties properties) {
         this.id = id;

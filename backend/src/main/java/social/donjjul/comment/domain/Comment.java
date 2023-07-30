@@ -1,22 +1,17 @@
-package social.donjjul.board.domain;
+package social.donjjul.comment.domain;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Columns;
-import org.hibernate.mapping.Join;
-import social.donjjul.comment.domain.Comment;
+import social.donjjul.board.domain.Board;
 import social.donjjul.common.BaseTimeEntity;
 import social.donjjul.member.domain.Member;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class Board extends BaseTimeEntity {
+public class Comment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,21 +20,17 @@ public class Board extends BaseTimeEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "board")
-    List<Comment> commentList = new ArrayList<>();
-
-    @Column(nullable = false)
-    private String title;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-
     @Builder
-    public Board(Member member, String title, String content){
+    public Comment(Member member, Board board, String content){
         this.member = member;
-        this.title = title;
+        this.board = board;
         this.content = content;
     }
-
 }

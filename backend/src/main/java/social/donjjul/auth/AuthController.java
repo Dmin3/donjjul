@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final AuthService authService;
 
-    @GetMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String code){
-        return ResponseEntity.ok(authService.login(code));
+    @GetMapping("/kakao")
+    public ResponseEntity<?> authKakao(@RequestParam String code){
+        return ResponseEntity.ok(authService.authKakao(code));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(){
+        return null;
     }
 
     @PostMapping("/signup")

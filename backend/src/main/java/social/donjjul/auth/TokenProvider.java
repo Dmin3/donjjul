@@ -65,7 +65,7 @@ public class TokenProvider {
 
         UserDetails userDetails = new User(claims.getSubject(), "", authorities);
 
-        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
+        return new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
     }
 
 

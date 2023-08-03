@@ -22,7 +22,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public void login(@RequestParam String memberId, HttpServletResponse response) {
-
         TokenDto tokenDto = authService.login(memberId);
         response.setHeader(HttpHeaders.AUTHORIZATION, tokenDto.getGrantType() + tokenDto.getAccessToken());
     }

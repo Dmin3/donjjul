@@ -1,5 +1,6 @@
 import Banner from '@/components/home/Banner';
 import PostiveStore from '@/components/home/PostiveStore';
+import PublicizeStore from '@/components/home/PublicizeStore';
 
 export default function Home() {
   return (
@@ -10,6 +11,8 @@ export default function Home() {
       }}
     >
       <Banner />
+
+      <PublicizeStore />
 
       <PostiveStore />
     </main>

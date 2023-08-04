@@ -10,8 +10,8 @@ const Header = () => {
       <LogoBox>로고</LogoBox>
 
       <MenuBox>
-        <MenuName>선한 영향력 가게</MenuName>
         <MenuName>홍보 가게</MenuName>
+        <MenuName>선한 영향력 가게</MenuName>
       </MenuBox>
 
       <LoginSpan>로그인</LoginSpan>

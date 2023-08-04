@@ -9,7 +9,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -23,12 +22,14 @@ import java.util.stream.Collectors;
 @Component
 public class TokenProvider {
     private static final String AUTHORITIES_KEY = "auth";
-    private static final String BEARER_TYPE = "Bearer";
+    private static final String BEARER_TYPE = "Bearer ";
     private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
 
     private final Key key;
+    private final CustomUserDetailService userDetailService;
 
-    public TokenProvider(@Value("${jwt.secret}") String secretKey) {
+    public TokenProvider(@Value("${jwt.secret}") String secretKey, CustomUserDetailService userDetailService) {
+        this.userDetailService = userDetailService;
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
@@ -63,9 +64,9 @@ public class TokenProvider {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        UserDetails userDetails = new User(claims.getSubject(), "", authorities);
+        UserDetails userDetails = userDetailService.loadUserByUsername(claims.getSubject());
 
-        return new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
+        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
     }
 
 

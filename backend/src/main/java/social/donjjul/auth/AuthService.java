@@ -70,6 +70,6 @@ public class AuthService {
     }
 
     private Authentication toAuthentication(Member member) {
-        return new UsernamePasswordAuthenticationToken(member.getId(), null, List.of(new SimpleGrantedAuthority(member.getMemberType().toString())));
+        return new UsernamePasswordAuthenticationToken(member.getId(), "", List.of(new SimpleGrantedAuthority(member.getMemberType().toString())));
     }
 }

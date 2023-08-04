@@ -15,7 +15,7 @@ public class Member {
     private String id;
 
     @Column(length = 50)
-    private String name;
+    private String nickname;
 
     @Column(columnDefinition = "TEXT")
     private String profileImage;
@@ -27,9 +27,9 @@ public class Member {
         return new Member(id, name, profileImage);
     }
 
-    public Member(String id, String name, String profileImage) {
+    public Member(String id, String nickname, String profileImage) {
         this.id = id;
-        this.name = name;
+        this.nickname = nickname;
         this.profileImage = profileImage;
         this.memberType = MemberType.USER;
     }

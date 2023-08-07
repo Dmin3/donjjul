@@ -31,4 +31,10 @@ public class AuthController {
         TokenDto tokenDto = authService.signup(memberCreateRequest);
         response.setHeader(HttpHeaders.AUTHORIZATION, tokenDto.getGrantType() + tokenDto.getAccessToken());
     }
+
+    // 체크 용도
+    @GetMapping("/check")
+    public String check(){
+        return "check check";
+    }
 }

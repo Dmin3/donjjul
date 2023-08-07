@@ -3,8 +3,7 @@ package social.donjjul.board.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Columns;
-import org.hibernate.mapping.Join;
+import social.donjjul.board.dto.BoardModifyRequest;
 import social.donjjul.comment.domain.Comment;
 import social.donjjul.common.BaseTimeEntity;
 import social.donjjul.member.domain.Member;
@@ -34,7 +33,6 @@ public class Board extends BaseTimeEntity {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-
     @Builder
     public Board(Member member, String title, String content){
         this.member = member;
@@ -42,4 +40,8 @@ public class Board extends BaseTimeEntity {
         this.content = content;
     }
 
+    public void update(BoardModifyRequest boardModifyRequest) {
+        this.title = boardModifyRequest.getTitle();
+        this.content = boardModifyRequest.getContent();
+    }
 }

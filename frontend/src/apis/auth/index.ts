@@ -1,7 +1,7 @@
 import { axios } from '../config/axios';
-import { ISignUpReq } from './type';
+import { IKakaoLoginRes, ISignUpReq } from './type';
 
-export const kakaoLogin = async (code: string) => {
+export const kakaoLogin = async (code: string): Promise<IKakaoLoginRes> => {
   const { data } = await axios.get(`/auth/kakao`, {
     params: {
       code,

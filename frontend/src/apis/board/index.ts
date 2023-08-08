@@ -1,13 +1,20 @@
 import { axios } from '../config/axios';
-import { ICreateBoardReq, IEditBoardReq } from './type';
+import {
+  ICreateBoardReq,
+  IEditBoardReq,
+  IGetBoardListRes,
+  IGetDetailBoardRes,
+} from './type';
 
-export const getDetailBoard = async (boardId: string) => {
+export const getDetailBoard = async (
+  boardId: string,
+): Promise<IGetDetailBoardRes> => {
   const { data } = await axios.get(`/board/${boardId}`);
 
   return data;
 };
 
-export const getBoardList = async () => {
+export const getBoardList = async (): Promise<IGetBoardListRes> => {
   const { data } = await axios.get(`/board`);
 
   return data;

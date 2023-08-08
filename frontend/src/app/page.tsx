@@ -1,6 +1,11 @@
+'use client';
+
+import { signIn } from '@/apis/auth';
+import { checkApi } from '@/apis/board';
 import Banner from '@/components/home/Banner';
 import PostiveStore from '@/components/home/PostiveStore';
 import PublicizeStore from '@/components/home/PublicizeStore';
+import { useEffect } from 'react';
 
 export default function Home() {
   return (

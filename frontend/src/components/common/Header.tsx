@@ -1,10 +1,19 @@
 'use client';
 
+import React from 'react';
+import { useRouter } from 'next/navigation';
+
 import styled from 'styled-components';
 
-import React from 'react';
+import { KAKAO_LOGIN_URL } from '@/constants/oauth';
 
 const Header = () => {
+  const router = useRouter();
+
+  const onClickLogin = () => {
+    router.push(`${KAKAO_LOGIN_URL}`);
+  };
+
   return (
     <HeaderBlock>
       <LogoBox>로고</LogoBox>
@@ -14,7 +23,7 @@ const Header = () => {
         <MenuName>선한 영향력 가게</MenuName>
       </MenuBox>
 
-      <LoginSpan>로그인</LoginSpan>
+      <LoginSpan onClick={onClickLogin}>로그인</LoginSpan>
     </HeaderBlock>
   );
 };

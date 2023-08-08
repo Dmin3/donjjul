@@ -43,3 +43,9 @@ export const deleteBoard = async (boardId: string) => {
 
   return data;
 };
+
+export const checkApi = async () => {
+  const { data } = await axios.get('/auth/check');
+
+  return data;
+};

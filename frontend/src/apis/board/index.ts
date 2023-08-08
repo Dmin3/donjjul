@@ -1,13 +1,20 @@
 import { axios } from '../config/axios';
-import { ICreateBoardReq, IEditBoardReq } from './type';
+import {
+  ICreateBoardReq,
+  IEditBoardReq,
+  IGetBoardListRes,
+  IGetDetailBoardRes,
+} from './type';
 
-export const getDetailBoard = async (boardId: string) => {
+export const getDetailBoard = async (
+  boardId: string,
+): Promise<IGetDetailBoardRes> => {
   const { data } = await axios.get(`/board/${boardId}`);
 
   return data;
 };
 
-export const getBoardList = async () => {
+export const getBoardList = async (): Promise<IGetBoardListRes> => {
   const { data } = await axios.get(`/board`);
 
   return data;
@@ -33,6 +40,12 @@ export const editBoard = async ({ boardId, title, content }: IEditBoardReq) => {
 
 export const deleteBoard = async (boardId: string) => {
   const { data } = await axios.delete(`/board/${boardId}`);
+
+  return data;
+};
+
+export const checkApi = async () => {
+  const { data } = await axios.get('/auth/check');
 
   return data;
 };

@@ -1,7 +1,9 @@
 import { axios } from '../config/axios';
-import { ISignUpReq } from './type';
+import { IKakaoLoginRes, ISignUpReq } from './type';
 
-export const kakaoLogin = async (code: string) => {
+export const kakaoLogin = async (
+  code: string | null,
+): Promise<IKakaoLoginRes> => {
   const { data } = await axios.get(`/auth/kakao`, {
     params: {
       code,
@@ -12,17 +14,17 @@ export const kakaoLogin = async (code: string) => {
 };
 
 export const signUp = async ({ id, nickname, profileImage }: ISignUpReq) => {
-  const { data } = await axios.post(`/auth/signup`, {
+  const { data, headers } = await axios.post(`/auth/signup`, {
     id,
     nickname,
     profileImage,
   });
 
-  return data;
+  return { data, headers };
 };
 
 export const signIn = async (memberId: string) => {
-  const { data } = await axios.post(
+  const { data, headers } = await axios.post(
     `/auth/login`,
     {},
     {
@@ -32,5 +34,5 @@ export const signIn = async (memberId: string) => {
     },
   );
 
-  return data;
+  return { data, headers };
 };

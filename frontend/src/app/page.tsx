@@ -1,6 +1,7 @@
 'use client';
 
 import Footer from '@/components/common/Footer';
+import Header from '@/components/common/Header';
 import Banner from '@/components/home/Banner';
 import PostiveStore from '@/components/home/PostiveStore';
 import PublicizeStore from '@/components/home/PublicizeStore';
@@ -13,6 +14,8 @@ export default function Home() {
         height: '100vh',
       }}
     >
+      <Header />
+
       <Banner />
 
       <PublicizeStore />

@@ -37,7 +37,8 @@ const HeaderBlock = styled.header`
   border-bottom: 1px solid #eaeaea;
   display: flex;
   align-items: center;
-  position: sticky;
+  position: fixed;
+  top: 0;
   padding-left: 13rem;
   padding-right: 13rem;
 `;

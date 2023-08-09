@@ -20,7 +20,7 @@ export interface IGetDetailBoardRes {
   modifyAt: string;
 }
 
-export interface IGetBoardListRes {
+export interface IGetBoardList {
   id: number;
   title: string;
   content: string;
@@ -30,4 +30,5 @@ export interface IGetBoardListRes {
   createAt: string;
   modifyAt: string;
 }
-[];
+
+export interface IGetBoardListRes extends Array<IGetBoardList> {}

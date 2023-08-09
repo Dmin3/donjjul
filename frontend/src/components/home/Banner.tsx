@@ -17,4 +17,5 @@ const BannerBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 6.5rem;
 `;

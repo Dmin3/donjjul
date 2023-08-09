@@ -20,6 +20,7 @@ const Oauth = () => {
               'accessToken',
               res.headers.authorization.replace('Bearer', '').replace(/ /g, ''),
             );
+            router.push('/');
           });
         }
 
@@ -33,6 +34,7 @@ const Oauth = () => {
               'accessToken',
               res.headers.authorization.replace('Bearer', '').replace(/ /g, ''),
             );
+            router.push('/');
           });
         }
       });

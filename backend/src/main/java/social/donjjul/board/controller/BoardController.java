@@ -19,7 +19,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping
-    public ResponseEntity<List<BoardResponse>> list(){
+    public ResponseEntity<List<BoardResponse>> list() {
         return ResponseEntity.ok(boardService.list());
     }
 
@@ -29,18 +29,22 @@ public class BoardController {
     }
 
     @PostMapping()
-    public void create(@AuthMember Member member, @RequestBody BoardCreateRequest boardCreateRequest) {
-        boardService.create(member, boardCreateRequest);
+    public ResponseEntity<BoardResponse> create(@AuthMember Member member, @RequestBody BoardCreateRequest boardCreateRequest) {
+        return ResponseEntity.ok(boardService.create(member, boardCreateRequest));
     }
 
     @PatchMapping("/{boardId}")
-    public void modify(@AuthMember Member member, @RequestBody BoardModifyRequest boardModifyRequest, @PathVariable Long boardId) {
+    public ResponseEntity<BoardResponse> modify(@AuthMember Member member, @RequestBody BoardModifyRequest boardModifyRequest, @PathVariable Long boardId) {
         boardService.modify(member, boardModifyRequest, boardId);
+
+        return ResponseEntity.ok(boardService.modify(member, boardModifyRequest, boardId));
     }
 
     @DeleteMapping("/{boardId}")
-    public void delete(@AuthMember Member member, @PathVariable Long boardId) {
+    public ResponseEntity<Boolean> delete(@AuthMember Member member, @PathVariable Long boardId) {
         boardService.delete(member, boardId);
+
+        return ResponseEntity.ok(true);
     }
 
 

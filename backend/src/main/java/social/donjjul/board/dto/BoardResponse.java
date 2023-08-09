@@ -3,9 +3,9 @@ package social.donjjul.board.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import social.donjjul.board.domain.Board;
-import social.donjjul.member.domain.Member;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,14 +17,13 @@ public class BoardResponse {
     private String nickname;
     private String profileImageUrl;
 
-    // TODO : AWS S3 붙히고 테스트 해볼 것.
-    private String imageUrl;
+    private List<ImageResponse> imageUrlList;
 
     private LocalDateTime createAt;
     private LocalDateTime modifyAt;
 
     public static BoardResponse of(Board board) {
-        return new BoardResponse(
+        BoardResponse boardResponse = new BoardResponse(
                 board.getId(),
                 board.getTitle(),
                 board.getContent(),
@@ -33,6 +32,15 @@ public class BoardResponse {
                 board.getCreatedAt(),
                 board.getModifiedAt()
         );
+
+        if (board.getImageList().size() != 0) {
+            List<ImageResponse> imageResponses = board.getImageList().stream().map(image -> ImageResponse.of(image)).toList();
+            boardResponse.setImageUrlList(imageResponses);
+
+            return boardResponse;
+        }
+
+        return boardResponse;
     }
 
     public BoardResponse(Long id, String title, String content, String nickname, String profileImageUrl, LocalDateTime createAt, LocalDateTime modifyAt) {
@@ -43,5 +51,10 @@ public class BoardResponse {
         this.profileImageUrl = profileImageUrl;
         this.createAt = createAt;
         this.modifyAt = modifyAt;
+    }
+
+    // 게시물에 이미지는 선택적이기에 생성자가 아닌 Setter 로 주입
+    private void setImageUrlList(List<ImageResponse> imageUrlList) {
+        this.imageUrlList = imageUrlList;
     }
 }

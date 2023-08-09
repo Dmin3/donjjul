@@ -1,6 +1,6 @@
 kakao:
   key: 617d25249e0e4962aac1a228b396bb3b
-  redirect-url: http://localhost:8080/oauth
+  redirect-url: http://localhost:3000/oauth
 
 cors:
   allowed-origins: 'https://localhost:3000,http://localhost:3000'

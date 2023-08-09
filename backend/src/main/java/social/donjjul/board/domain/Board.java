@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import social.donjjul.board.dto.BoardModifyRequest;
-import social.donjjul.comment.domain.Comment;
 import social.donjjul.common.BaseTimeEntity;
 import social.donjjul.member.domain.Member;
 
@@ -25,7 +24,7 @@ public class Board extends BaseTimeEntity {
     private Member member;
 
     @OneToMany(mappedBy = "board")
-    List<Comment> commentList = new ArrayList<>();
+    List<Image> imageList = new ArrayList<>();
 
     @Column(nullable = false)
     private String title;

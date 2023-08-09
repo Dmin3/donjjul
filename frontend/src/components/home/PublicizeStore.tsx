@@ -4,28 +4,45 @@ import React from 'react';
 import Image from 'next/image';
 
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
+
+import { getBoardList } from '@/apis/board';
+
+import { QUERY_KEY } from '@/constants/queryKey';
 
 const PublicizeStore = () => {
-  const tempArr = [1, 2, 3, 4, 5, 6, 7, 8];
+  const { data: publicizeStoreData } = useQuery(
+    [QUERY_KEY.BOARD.GET_BOARD_LIST],
+    getBoardList,
+  );
 
   return (
     <PublicizeStoreBlock>
       <Title>홍보 가게</Title>
 
-      <CarouselSection>
-        {tempArr.map((data) => (
-          <PostiveStoreCard key={data}>
+      <ContentSection>
+        {publicizeStoreData?.slice(0, 8).map((data) => (
+          <PublicizeStoreCard key={data.id}>
             <Image
               src="/images/Test.png"
               width={250}
               height={192}
               alt="Test-Img"
             />
-            <StoreTitle>제목</StoreTitle>
-            <StoreContent>내용</StoreContent>
-          </PostiveStoreCard>
+            <StoreTitle>{data.title}</StoreTitle>
+            <StoreContent>{data.content}</StoreContent>
+            <UserProfileSection>
+              <Image
+                src={data.profileImageUrl}
+                width={30}
+                height={30}
+                alt="Test-Img"
+              />
+              <UserName>{data.nickname}</UserName>
+            </UserProfileSection>
+          </PublicizeStoreCard>
         ))}
-      </CarouselSection>
+      </ContentSection>
     </PublicizeStoreBlock>
   );
 };
@@ -49,7 +66,7 @@ const Title = styled.h4`
   margin-top: 2rem;
 `;
 
-const CarouselSection = styled.section`
+const ContentSection = styled.section`
   display: flex;
   flex-wrap: wrap;
   row-gap: 1.3rem;
@@ -59,7 +76,7 @@ const CarouselSection = styled.section`
   margin-top: 2rem;
 `;
 
-const PostiveStoreCard = styled.div`
+const PublicizeStoreCard = styled.div`
   width: 16.5rem;
   height: 20rem;
   padding-left: 0.5rem;
@@ -97,5 +114,27 @@ const StoreContent = styled.h4`
   letter-spacing: normal;
   color: #191919;
   margin-left: 0.625rem;
-  margin-top: 0.8rem;
+  margin-top: 0.4rem;
+`;
+
+const UserProfileSection = styled.section`
+  display: flex;
+  align-items: center;
+  margin-top: 0.3rem;
+  margin-left: 0.625rem;
+
+  img {
+    border-radius: 15px;
+  }
+`;
+
+const UserName = styled.h4`
+  font-size: 0.8rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: #191919;
+  margin-left: 0.3rem;
 `;

@@ -7,7 +7,7 @@ const BoardCreate = () => {
     <div
       style={{
         width: '100%',
-        height: '100vh',
+        height: '100%',
         backgroundColor: '#e4e4e4',
       }}
     >

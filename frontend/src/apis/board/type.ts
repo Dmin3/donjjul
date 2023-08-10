@@ -3,6 +3,17 @@ export interface ICreateBoardReq {
   content: string;
 }
 
+export interface ICreateBoardRes {
+  id: number;
+  title: string;
+  content: string;
+  nickname: string;
+  profileImageUrl: string;
+  imageUrlList: null;
+  createAt: string;
+  modifyAt: string;
+}
+
 export interface IEditBoardReq {
   boardId: string;
   title: string;
@@ -18,6 +29,11 @@ export interface IGetDetailBoardRes {
   imageUrl: string | null;
   createAt: string;
   modifyAt: string;
+  imageUrlList: {
+    id: number;
+    imageUrl: string;
+    priority: number;
+  }[];
 }
 
 export interface IGetBoardList {
@@ -29,6 +45,11 @@ export interface IGetBoardList {
   imageUrl: string | null;
   createAt: string;
   modifyAt: string;
+  imageUrlList: {
+    id: number;
+    imageUrl: string;
+    priority: number;
+  }[];
 }
 
 export interface IGetBoardListRes extends Array<IGetBoardList> {}

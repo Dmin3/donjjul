@@ -1,5 +1,6 @@
 package social.donjjul.board.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,4 +23,13 @@ public class Image{
 
     private Integer priority;
 
+    public static Image createImage(Board board, String imageUrl, Integer priority){
+        return new Image(board, imageUrl, priority);
+    }
+
+    public Image(Board board, String imageUrl, Integer priority) {
+        this.board = board;
+        this.imageUrl = imageUrl;
+        this.priority = priority;
+    }
 }

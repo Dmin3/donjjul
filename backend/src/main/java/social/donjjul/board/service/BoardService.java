@@ -24,20 +24,19 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public List<BoardResponse> list() {
-        return boardRepository.findAll().stream().map(board -> BoardResponse.of(board)).toList();
+        List<Board> boardList = boardRepository.findAllByFetchJoin();
+
+        return boardList.stream().map(board -> BoardResponse.of(board)).toList();
     }
 
     public BoardResponse get(Long boardId) {
-        Board board = boardRepository.findById(boardId).orElseThrow();
+        Board board = boardRepository.findByIdFetchJoin(boardId).orElseThrow();
         findMember(board.getMember().getId());
 
-
-        BoardResponse of = BoardResponse.of(board);
-
-        return of;
+        return BoardResponse.of(board);
     }
 
-    public void create(Member member, BoardCreateRequest boardCreateRequest) {
+    public BoardResponse create(Member member, BoardCreateRequest boardCreateRequest) {
         Member findMember = findMember(member.getId());
 
         // 게시물 생성
@@ -47,16 +46,16 @@ public class BoardService {
                 .member(findMember)
                 .build();
 
-        boardRepository.save(board);
+        return BoardResponse.of(boardRepository.save(board));
     }
 
-    public void modify(Member member, BoardModifyRequest boardModifyRequest, Long boardId) {
+    public BoardResponse modify(Member member, BoardModifyRequest boardModifyRequest, Long boardId) {
         findMember(member.getId());
         Board board = boardRepository.findById(boardId).orElseThrow();
 
         board.update(boardModifyRequest);
 
-        boardRepository.save(board);
+        return BoardResponse.of(boardRepository.save(board));
     }
 
 

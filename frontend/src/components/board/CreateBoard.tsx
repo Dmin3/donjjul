@@ -100,8 +100,8 @@ const CreateBoard = () => {
 
         <ImgNameUl>
           {imgFile.map((data: any, i: number) => (
-            <ImgLi>
-              <ImgName key={i}>{data.name}</ImgName>
+            <ImgLi key={i}>
+              <ImgName>{data.name}</ImgName>
               <Image
                 src="/svgs/Delete.svg"
                 width={15}

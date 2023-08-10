@@ -1,3 +1,11 @@
+-- 순서 중요
+drop table if exists image;
+drop table if exists comment;
+drop table if exists likes;
+drop table if exists board;
+drop table if exists member;
+drop table if exists store;
+
 create table member
 (
     member_id     varchar(255) not null

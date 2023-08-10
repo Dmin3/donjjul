@@ -1,6 +1,7 @@
 import { axios } from '../config/axios';
 import {
   ICreateBoardReq,
+  ICreateBoardRes,
   IEditBoardReq,
   IGetBoardListRes,
   IGetDetailBoardRes,
@@ -20,7 +21,10 @@ export const getBoardList = async (): Promise<IGetBoardListRes> => {
   return data;
 };
 
-export const createBoard = async ({ title, content }: ICreateBoardReq) => {
+export const createBoard = async ({
+  title,
+  content,
+}: ICreateBoardReq): Promise<ICreateBoardRes> => {
   const { data } = await axios.post(`/board`, {
     title,
     content,
@@ -44,8 +48,15 @@ export const deleteBoard = async (boardId: string) => {
   return data;
 };
 
-export const checkApi = async () => {
-  const { data } = await axios.get('/auth/check');
+export const boardImgUpload = async (boardId: number, imgFile: any) => {
+  const formData = new FormData();
+  imgFile.map((image: any) => {
+    formData.append('data', image);
+  });
+
+  const { data } = await axios.post(`/image/${boardId}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 
   return data;
 };

@@ -24,7 +24,7 @@ const PublicizeStore = () => {
         {publicizeStoreData?.slice(0, 8).map((data) => (
           <PublicizeStoreCard key={data.id}>
             <Image
-              src="/images/Test.png"
+              src={data.imageUrlList[0].imageUrl}
               width={250}
               height={192}
               alt="Test-Img"

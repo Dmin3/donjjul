@@ -1,5 +1,5 @@
 import { axios } from '../config/axios';
-import { IKakaoLoginRes, ISignUpReq } from './type';
+import { IGetMyInfoRes, IKakaoLoginRes, ISignUpReq } from './type';
 
 export const kakaoLogin = async (
   code: string | null,
@@ -35,4 +35,10 @@ export const signIn = async (memberId: string) => {
   );
 
   return { data, headers };
+};
+
+export const getMyInfo = async (): Promise<IGetMyInfoRes> => {
+  const { data } = await axios.get('/member/me');
+
+  return data;
 };

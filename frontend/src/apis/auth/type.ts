@@ -12,3 +12,8 @@ export interface ISignUpReq {
   nickname: string;
   profileImage: string;
 }
+
+export interface IGetMyInfoRes {
+  nickname: string;
+  profileImage: string;
+}

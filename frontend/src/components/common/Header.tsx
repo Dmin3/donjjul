@@ -2,13 +2,23 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
+
+import { getMyInfo } from '@/apis/auth';
 
 import { KAKAO_LOGIN_URL } from '@/constants/oauth';
+import { QUERY_KEY } from '@/constants/queryKey';
 
 const Header = () => {
   const router = useRouter();
+  const accessToken = localStorage.getItem('accessToken');
+
+  const { data: myInfo } = useQuery([QUERY_KEY.MEMBER.GET_MY_INFO], getMyInfo, {
+    enabled: !!accessToken,
+  });
 
   const onClickLogin = () => {
     router.push(`${KAKAO_LOGIN_URL}`);
@@ -16,14 +26,26 @@ const Header = () => {
 
   return (
     <HeaderBlock>
-      <LogoBox>로고</LogoBox>
+      <LogoBox onClick={() => router.push('/')}>로고</LogoBox>
 
       <MenuBox>
         <MenuName onClick={() => router.push('/board')}>홍보 가게</MenuName>
         <MenuName>선한 영향력 가게</MenuName>
       </MenuBox>
 
-      <LoginSpan onClick={onClickLogin}>로그인</LoginSpan>
+      {myInfo ? (
+        <UserBox>
+          <Image
+            src={myInfo.profileImage}
+            width={50}
+            height={50}
+            alt="Profile-Img"
+          />
+          <UserName>{myInfo.nickname}</UserName>
+        </UserBox>
+      ) : (
+        <LoginSpan onClick={onClickLogin}>로그인</LoginSpan>
+      )}
     </HeaderBlock>
   );
 };
@@ -50,6 +72,7 @@ const LogoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const MenuBox = styled.div`
@@ -83,4 +106,28 @@ const LoginSpan = styled.span`
   color: #191919;
   cursor: pointer;
   margin-left: auto;
+`;
+
+const UserBox = styled.div`
+  width: 13rem;
+  height: 4rem;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    border-radius: 30px;
+  }
+`;
+
+const UserName = styled.h4`
+  font-size: 1rem;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.63;
+  letter-spacing: -0.24px;
+  color: #191919;
+  margin-left: 0.5rem;
 `;

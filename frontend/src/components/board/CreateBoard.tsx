@@ -1,18 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
-
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
 
-import { createBoard } from '@/apis/board';
+import { boardImgUpload, createBoard } from '@/apis/board';
 
 const CreateBoard = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [imgFile, setImgFile] = useState<any>([]);
 
   const router = useRouter();
 
@@ -24,14 +24,35 @@ const CreateBoard = () => {
     setContent(e.target.value);
   };
 
-  const mutationCreateBoard = useMutation(
-    () => createBoard({ title, content }),
+  const onChangeImageFile = (e: any) => {
+    setImgFile([...imgFile, ...e.target.files]);
+  };
+
+  const mutationBoardImgUplpad = useMutation(
+    (boardId: number) => boardImgUpload(boardId, imgFile),
     {
       onSuccess: () => {
         router.push('/board');
       },
     },
   );
+
+  const mutationCreateBoard = useMutation(
+    () => createBoard({ title, content }),
+    {
+      onSuccess: (data) => {
+        if (imgFile) {
+          mutationBoardImgUplpad.mutate(data.id);
+        }
+      },
+    },
+  );
+
+  const onClickImgDelete = (index: number) => {
+    const tempArr = [...imgFile];
+    tempArr.splice(index, 1);
+    setImgFile(tempArr);
+  };
 
   return (
     <CreateBoardBlock>
@@ -65,6 +86,33 @@ const CreateBoard = () => {
           onChange={onChangeContent}
         />
       </ContentSection>
+
+      <UploadSection>
+        <FileInput
+          type="file"
+          id="file"
+          multiple
+          accept="image/jpg, image/png, image/jpeg, image/webp"
+          onChange={onChangeImageFile}
+        />
+
+        <UploadButton htmlFor="file">업로드</UploadButton>
+
+        <ImgNameUl>
+          {imgFile.map((data: any, i: number) => (
+            <ImgLi>
+              <ImgName key={i}>{data.name}</ImgName>
+              <Image
+                src="/svgs/Delete.svg"
+                width={15}
+                height={15}
+                alt="Delete"
+                onClick={() => onClickImgDelete(i)}
+              />
+            </ImgLi>
+          ))}
+        </ImgNameUl>
+      </UploadSection>
     </CreateBoardBlock>
   );
 };
@@ -73,7 +121,6 @@ export default CreateBoard;
 
 const CreateBoardBlock = styled.div`
   max-width: 50rem;
-  height: 100%;
   margin: 0 auto;
   border: 1px solid #eaeaea;
   background-color: #fff;
@@ -159,7 +206,7 @@ const TitleInput = styled.input`
 
 const ContentSection = styled.section`
   width: 100%;
-  height: 30rem;
+  height: 38rem;
   border-bottom: 1px solid #eaeaea;
   padding: 1.8rem;
 `;
@@ -190,4 +237,66 @@ const ContentArea = styled.textarea`
   &:focus {
     outline: none;
   }
+`;
+
+const UploadSection = styled.section`
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+`;
+
+const FileInput = styled.input`
+  display: none;
+`;
+
+const UploadButton = styled.label`
+  width: 5.375rem;
+  height: 4.125rem;
+  border: solid 1px #eaeaea;
+  background-color: #f5f6f8;
+  font-size: 0.875rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: -0.21px;
+  color: #191919;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 15px;
+`;
+
+const ImgNameUl = styled.ul`
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+  width: 20rem;
+  height: 80%;
+  overflow-y: auto;
+  border: 1px solid #eaeaea;
+`;
+
+const ImgLi = styled.li`
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-left: 0.5rem;
+    margin-top: 0.3rem;
+    cursor: pointer;
+  }
+`;
+
+const ImgName = styled.h4`
+  font-size: 0.8rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: -0.21px;
+  color: #191919;
 `;

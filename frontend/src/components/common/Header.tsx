@@ -14,11 +14,12 @@ import { QUERY_KEY } from '@/constants/queryKey';
 
 const Header = () => {
   const router = useRouter();
-  const accessToken = localStorage.getItem('accessToken');
 
-  const { data: myInfo } = useQuery([QUERY_KEY.MEMBER.GET_MY_INFO], getMyInfo, {
-    enabled: !!accessToken,
-  });
+  const { data: myInfo } = useQuery(
+    [QUERY_KEY.MEMBER.GET_MY_INFO],
+    getMyInfo,
+    {},
+  );
 
   const onClickLogin = () => {
     router.push(`${KAKAO_LOGIN_URL}`);

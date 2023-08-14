@@ -30,6 +30,8 @@ public class Store{
 
     private String detailAddress;
 
+    private String openTime;
+
     @Column(nullable = false)
     private String zipCode;
 
@@ -50,7 +52,7 @@ public class Store{
     @Builder
     public Store(String name, String industryName, String city,
                  String streetAddress, String groundAddress,
-                 String detailAddress, String zipCode, String providedItem,
+                 String detailAddress,String openTime, String zipCode, String providedItem,
                  String provided_1, String provided_2, Double latitude, Double longitude){
         this.name = name;
         this.industryName = industryName;
@@ -58,6 +60,7 @@ public class Store{
         this.streetAddress = streetAddress;
         this.groundAddress = groundAddress;
         this.detailAddress = detailAddress;
+        this.openTime = openTime;
         this.zipCode = zipCode;
         this.providedItem = providedItem;
         this.provided_1 = provided_1;

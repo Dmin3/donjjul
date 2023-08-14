@@ -16,6 +16,7 @@ public class BoardResponse {
 
     private String nickname;
     private String profileImageUrl;
+    private int likesCount;
 
     private List<ImageResponse> imageUrlList;
 
@@ -23,6 +24,27 @@ public class BoardResponse {
     private LocalDateTime modifyAt;
 
     public static BoardResponse of(Board board) {
+        BoardResponse boardResponse = new BoardResponse(
+                board.getId(),
+                board.getTitle(),
+                board.getContent(),
+                board.getMember().getNickname(),
+                board.getMember().getProfileImage(),
+                board.getCreatedAt(),
+                board.getModifiedAt()
+        );
+
+        if (board.getImageList().size() != 0) {
+            List<ImageResponse> imageResponses = board.getImageList().stream().map(image -> ImageResponse.of(image)).toList();
+            boardResponse.setImageUrlList(imageResponses);
+
+            return boardResponse;
+        }
+
+        return boardResponse;
+    }
+
+    public static BoardResponse of(Board board, int likesCount) {
         BoardResponse boardResponse = new BoardResponse(
                 board.getId(),
                 board.getTitle(),

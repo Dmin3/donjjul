@@ -1,5 +1,7 @@
 'use client';
+
 import React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import styled from 'styled-components';
@@ -8,7 +10,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getBoardList } from '@/apis/board';
 
 import { QUERY_KEY } from '@/constants/queryKey';
-import Image from 'next/image';
 
 const BoardList = () => {
   const router = useRouter();

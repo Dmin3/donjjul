@@ -31,7 +31,9 @@ const Header = () => {
 
       <MenuBox>
         <MenuName onClick={() => router.push('/board')}>홍보 가게</MenuName>
-        <MenuName>선한 영향력 가게</MenuName>
+        <MenuName onClick={() => router.push('/store')}>
+          선한 영향력 가게
+        </MenuName>
       </MenuBox>
 
       {myInfo ? (

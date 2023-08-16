@@ -121,6 +121,7 @@ export default CreateBoard;
 
 const CreateBoardBlock = styled.div`
   max-width: 50rem;
+  height: 100%;
   margin: 0 auto;
   border: 1px solid #eaeaea;
   background-color: #fff;

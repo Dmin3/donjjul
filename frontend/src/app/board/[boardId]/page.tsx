@@ -1,7 +1,16 @@
 import React from 'react';
 
-const BoardDetail = () => {
-  return <div>page</div>;
+import Header from '@/components/common/Header';
+import BoardDetail from '@/components/board/BoardDetail';
+
+const BoardDetailPage = () => {
+  return (
+    <div style={{ width: '100%', height: '100%' }}>
+      <Header />
+
+      <BoardDetail />
+    </div>
+  );
 };
 
-export default BoardDetail;
+export default BoardDetailPage;

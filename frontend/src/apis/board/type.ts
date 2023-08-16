@@ -26,7 +26,6 @@ export interface IGetDetailBoardRes {
   content: string;
   nickname: string;
   profileImageUrl: string;
-  imageUrl: string | null;
   createAt: string;
   modifyAt: string;
   imageUrlList: {

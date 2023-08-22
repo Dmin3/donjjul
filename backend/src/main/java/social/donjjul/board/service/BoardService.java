@@ -9,6 +9,8 @@ import social.donjjul.board.dto.BoardCreateRequest;
 import social.donjjul.board.dto.BoardModifyRequest;
 import social.donjjul.board.dto.BoardResponse;
 import social.donjjul.board.repository.BoardRepository;
+import social.donjjul.likes.domain.Likes;
+import social.donjjul.likes.repository.LikesRepository;
 import social.donjjul.member.domain.Member;
 import social.donjjul.member.repository.MemberRepository;
 
@@ -22,6 +24,7 @@ import java.util.List;
 public class BoardService {
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
+    private final LikesRepository likesRepository;
 
     public List<BoardResponse> list() {
         List<Board> boardList = boardRepository.findAllByFetchJoin();
@@ -33,7 +36,9 @@ public class BoardService {
         Board board = boardRepository.findByIdFetchJoin(boardId).orElseThrow();
         findMember(board.getMember().getId());
 
-        return BoardResponse.of(board);
+        List<Likes> likes = likesRepository.findByBoardId(boardId);
+
+        return BoardResponse.of(board, likes.size());
     }
 
     public BoardResponse create(Member member, BoardCreateRequest boardCreateRequest) {

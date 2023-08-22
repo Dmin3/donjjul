@@ -28,6 +28,7 @@ export interface IGetDetailBoardRes {
   profileImageUrl: string;
   createAt: string;
   modifyAt: string;
+  likeCount: number;
   imageUrlList: {
     id: number;
     imageUrl: string;
@@ -44,6 +45,7 @@ export interface IGetBoardList {
   imageUrl: string | null;
   createAt: string;
   modifyAt: string;
+  likeCount: number;
   imageUrlList: {
     id: number;
     imageUrl: string;

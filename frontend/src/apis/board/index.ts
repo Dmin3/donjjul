@@ -60,3 +60,9 @@ export const boardImgUpload = async (boardId: number, imgFile: any) => {
 
   return data;
 };
+
+export const boardLike = async (boardId: string) => {
+  const { data } = await axios.post(`/likes/${boardId}`);
+
+  return data;
+};

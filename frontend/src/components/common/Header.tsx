@@ -1,11 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
+
+import SignOutModal from '@/components/modal/SignOutModal';
 
 import { getMyInfo } from '@/apis/auth';
 
@@ -13,6 +15,8 @@ import { KAKAO_LOGIN_URL } from '@/constants/oauth';
 import { QUERY_KEY } from '@/constants/queryKey';
 
 const Header = () => {
+  const [modalToggle, setModalToggle] = useState(false);
+
   const router = useRouter();
 
   const { data: myInfo } = useQuery(
@@ -37,7 +41,7 @@ const Header = () => {
       </MenuBox>
 
       {myInfo ? (
-        <UserBox>
+        <UserBox onClick={() => setModalToggle(!modalToggle)}>
           <Image
             src={myInfo.profileImage}
             width={50}
@@ -45,6 +49,8 @@ const Header = () => {
             alt="Profile-Img"
           />
           <UserName>{myInfo.nickname}</UserName>
+
+          {modalToggle && <SignOutModal />}
         </UserBox>
       ) : (
         <LoginSpan onClick={onClickLogin}>로그인</LoginSpan>
@@ -118,6 +124,7 @@ const UserBox = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  position: relative;
 
   img {
     border-radius: 30px;

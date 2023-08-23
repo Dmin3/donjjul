@@ -29,7 +29,10 @@ const BoardList = () => {
 
       <ContentSection>
         {publicizeStoreData?.map((data) => (
-          <PublicizeStoreCard key={data.id}>
+          <PublicizeStoreCard
+            key={data.id}
+            onClick={() => router.push(`/board/${data.id}`)}
+          >
             <Image
               src={data.imageUrlList[0].imageUrl}
               width={250}
@@ -107,6 +110,7 @@ const PublicizeStoreCard = styled.div`
   height: 20rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+  cursor: pointer;
 
   img {
     border-radius: 10px;

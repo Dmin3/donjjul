@@ -17,7 +17,7 @@ const PostiveStore = () => {
           slidesToShow={4}
           infinite
           autoplay
-          speed={1000}
+          speed={2000}
         >
           <PostiveStoreCard>!</PostiveStoreCard>
           <PostiveStoreCard>!</PostiveStoreCard>

@@ -5,9 +5,11 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import styled from 'styled-components';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { boardImgUpload, createBoard } from '@/apis/board';
+
+import { QUERY_KEY } from '@/constants/queryKey';
 
 const CreateBoard = () => {
   const [title, setTitle] = useState('');
@@ -15,6 +17,7 @@ const CreateBoard = () => {
   const [imgFile, setImgFile] = useState<any>([]);
 
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -32,6 +35,7 @@ const CreateBoard = () => {
     (boardId: number) => boardImgUpload(boardId, imgFile),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries([QUERY_KEY.BOARD.GET_BOARD_LIST]);
         router.push('/board');
       },
     },

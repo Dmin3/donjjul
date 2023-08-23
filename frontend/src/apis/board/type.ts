@@ -54,3 +54,24 @@ export interface IGetBoardList {
 }
 
 export interface IGetBoardListRes extends Array<IGetBoardList> {}
+
+export interface ICreateBoardCommentReq {
+  boardId: string;
+  content: string;
+}
+
+export interface IEditBoardCommentReq {
+  commentId: number;
+  content: string;
+}
+
+export interface IGetBoardCommentList {
+  commentId: number;
+  content: string;
+  nickname: string;
+  profileImage: string;
+  createdAt: string;
+  modifiedAt: string;
+}
+
+export interface IGetBoardCommentListRes extends Array<IGetBoardCommentList> {}

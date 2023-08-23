@@ -29,7 +29,7 @@ public class DonjjulApplication {
         SpringApplication.run(DonjjulApplication.class, args);
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void testData() {
 
 

@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/board/**").permitAll()
                 .antMatchers("/store/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/likes/** ").permitAll()
+                .antMatchers(HttpMethod.GET, "/comment/**").permitAll()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .anyRequest().authenticated()
                 .and()

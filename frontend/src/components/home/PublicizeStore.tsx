@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
@@ -22,25 +23,27 @@ const PublicizeStore = () => {
 
       <ContentSection>
         {publicizeStoreData?.slice(0, 8).map((data) => (
-          <PublicizeStoreCard key={data.id}>
-            <Image
-              src={data.imageUrlList[0].imageUrl}
-              width={250}
-              height={192}
-              alt="Test-Img"
-            />
-            <StoreTitle>{data.title}</StoreTitle>
-            <StoreContent>{data.content}</StoreContent>
-            <UserProfileSection>
+          <Link href={`/board/${String(data.id)}`} key={data.id}>
+            <PublicizeStoreCard>
               <Image
-                src={data.profileImageUrl}
-                width={30}
-                height={30}
+                src={data.imageUrlList[0].imageUrl}
+                width={250}
+                height={192}
                 alt="Test-Img"
               />
-              <UserName>{data.nickname}</UserName>
-            </UserProfileSection>
-          </PublicizeStoreCard>
+              <StoreTitle>{data.title}</StoreTitle>
+              <StoreContent>{data.content}</StoreContent>
+              <UserProfileSection>
+                <Image
+                  src={data.profileImageUrl}
+                  width={30}
+                  height={30}
+                  alt="Test-Img"
+                />
+                <UserName>{data.nickname}</UserName>
+              </UserProfileSection>
+            </PublicizeStoreCard>
+          </Link>
         ))}
       </ContentSection>
     </PublicizeStoreBlock>

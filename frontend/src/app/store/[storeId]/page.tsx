@@ -1,7 +1,16 @@
 import React from 'react';
 
-const StoreDetail = () => {
-  return <div>page</div>;
+import Header from '@/components/common/Header';
+import StoreDetail from '@/components/store/StoreDetail';
+
+const StoreDetailPage = () => {
+  return (
+    <div>
+      <Header />
+
+      <StoreDetail />
+    </div>
+  );
 };
 
-export default StoreDetail;
+export default StoreDetailPage;

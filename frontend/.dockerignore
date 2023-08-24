@@ -1,4 +1,9 @@
 node_modules
 .next
-.github
-.husky
+Dockerfile
+.dockerignore
+.git
+.gitignore
+*.md
+*.sh
+*.yml

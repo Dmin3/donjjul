@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import Slick from '@/components/common/Slick';
 
-import { getBoardComment, getDetailBoard } from '@/apis/board';
+import { getDetailBoard } from '@/apis/board';
 
 import { QUERY_KEY } from '@/constants/queryKey';
 
@@ -19,11 +19,6 @@ const BoardDetail = () => {
   const { data: boardDetail } = useQuery(
     [QUERY_KEY.BOARD.GET_DETAIL_BOARD, params.boardId],
     () => getDetailBoard(String(params.boardId)),
-  );
-
-  const { data: boardComment } = useQuery(
-    [QUERY_KEY.BOARD.GET_BOARD_COMMENT],
-    () => getBoardComment(String(params.boardId)),
   );
 
   return (

@@ -1,12 +1,23 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
 
 import Slick from '@/components/common/Slick';
 
+import { getStoreList } from '@/apis/store';
+
+import { QUERY_KEY } from '@/constants/queryKey';
+
 const PostiveStore = () => {
+  const { data: postiveStoreData } = useQuery(
+    [QUERY_KEY.STORE.GET_STORE_LIST],
+    getStoreList,
+  );
+
   return (
     <PostiveStoreBlock>
       <Title>선한 영향력 가게</Title>
@@ -19,12 +30,11 @@ const PostiveStore = () => {
           autoplay
           speed={2000}
         >
-          <PostiveStoreCard>!</PostiveStoreCard>
-          <PostiveStoreCard>!</PostiveStoreCard>
-          <PostiveStoreCard>!</PostiveStoreCard>
-          <PostiveStoreCard>!</PostiveStoreCard>
-          <PostiveStoreCard>!</PostiveStoreCard>
-          <PostiveStoreCard>!</PostiveStoreCard>
+          {postiveStoreData?.map((data) => (
+            <Link href={`/store/${String(data.id)}`} key={data.id}>
+              <PostiveStoreCard />
+            </Link>
+          ))}
         </Slick>
       </ContentSection>
     </PostiveStoreBlock>
@@ -54,7 +64,6 @@ const Title = styled.h4`
 const ContentSection = styled.section`
   height: 20rem;
   margin-top: 2rem;
-  background-color: skyblue;
 `;
 
 const PostiveStoreCard = styled.div`

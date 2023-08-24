@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from '@/components/common/Header';
 import BoardDetail from '@/components/board/BoardDetail';
+import BoardComment from '@/components/board/BoardComment';
 
 const BoardDetailPage = () => {
   return (
@@ -9,6 +10,8 @@ const BoardDetailPage = () => {
       <Header />
 
       <BoardDetail />
+
+      <BoardComment />
     </div>
   );
 };

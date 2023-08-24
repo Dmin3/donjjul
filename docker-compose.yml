@@ -40,3 +40,15 @@ services:
     restart: always
     environment:
       TZ: Asia/Seoul
+
+  nginx:
+    container_name: donjjul-nginx
+    image: donjjul.kr.ncr.ntruss.com/donjjul-front:nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - node
+    restart: always
+    environment:
+      TZ: Asia/Seoul

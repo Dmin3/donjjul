@@ -24,7 +24,7 @@ const BoardList = () => {
       <TitleSection>
         <Title>홍보 가게</Title>
 
-        <Button onClick={() => router.push('/board/create')}>홍보하기</Button>
+        <Button onClick={() => router.push('/store')}>홍보하기</Button>
       </TitleSection>
 
       <ContentSection>

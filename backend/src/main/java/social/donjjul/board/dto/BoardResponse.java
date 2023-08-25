@@ -3,6 +3,7 @@ package social.donjjul.board.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import social.donjjul.board.domain.Board;
+import social.donjjul.store.dto.StoreResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,6 +20,7 @@ public class BoardResponse {
     private int likesCount;
 
     private List<ImageResponse> imageUrlList;
+    private StoreResponse storeInfo;
 
     private LocalDateTime createAt;
     private LocalDateTime modifyAt;
@@ -54,6 +56,9 @@ public class BoardResponse {
                 board.getCreatedAt(),
                 board.getModifiedAt()
         );
+
+        boardResponse.setLikesCount(likesCount);
+        boardResponse.setStoreInfo(StoreResponse.of(board.getStore()));
 
         if (board.getImageList().size() != 0) {
             List<ImageResponse> imageResponses = board.getImageList().stream().map(image -> ImageResponse.of(image)).toList();

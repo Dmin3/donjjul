@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import social.donjjul.board.dto.BoardModifyRequest;
 import social.donjjul.common.BaseTimeEntity;
 import social.donjjul.member.domain.Member;
+import social.donjjul.store.domain.Store;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,6 +24,10 @@ public class Board extends BaseTimeEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
     @OneToMany(mappedBy = "board")
     List<Image> imageList = new ArrayList<>();
 
@@ -33,8 +38,9 @@ public class Board extends BaseTimeEntity {
     private String content;
 
     @Builder
-    public Board(Member member, String title, String content){
+    public Board(Member member, Store store, String title, String content){
         this.member = member;
+        this.store = store;
         this.title = title;
         this.content = content;
     }

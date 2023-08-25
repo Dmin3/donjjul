@@ -20,48 +20,7 @@ import java.util.List;
 @EnableConfigurationProperties(CorsConfigProperties.class)
 @RequiredArgsConstructor
 public class DonjjulApplication {
-    private final MemberRepository memberRepository;
-    private final BoardRepository boardRepository;
-    private final LikesRepository likesRepository;
-
-
     public static void main(String[] args) {
         SpringApplication.run(DonjjulApplication.class, args);
     }
-
-//    @PostConstruct
-    public void testData() {
-
-
-        Member member = new Member("zzz", "zzz", null);
-        Member member1 = new Member("zz1", "zzz", null);
-        Member member2 = new Member("zz2", "zzz", null);
-
-        List<Member> memberList = List.of(member1, member2, member);
-
-        memberRepository.saveAll(memberList);
-
-        Board board = new Board(member, "sdasda11", "dasdad");
-
-        Board board1 = new Board(member, "sdasda11", "dasdad");
-
-        Board board2 = new Board(member, "sdasda22", "dasdad");
-
-        List<Board> boards = List.of(board1,board2,board);
-
-        boardRepository.saveAll(boards);
-
-        List<Likes> likes = List.of(new Likes(member, board),
-                new Likes(member, board1),
-                new Likes(member, board2),
-                new Likes(member2, board),
-                new Likes(member2, board1),
-                new Likes(member2, board2),
-                new Likes(member1, board));
-
-        likesRepository.saveAll(likes);
-
-
-    }
-
 }

@@ -12,6 +12,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query("select distinct b from Board b join fetch b.member join fetch b.imageList")
     List<Board> findAllByFetchJoin();
 
-    @Query("select distinct b from Board b join fetch b.imageList join fetch b.member where b.id = :boardId")
+    @Query("select distinct b from Board b left join fetch b.imageList join fetch b.member join fetch b.store where b.id = :boardId")
     Optional<Board> findByIdFetchJoin(@Param("boardId") Long boardId);
+
+    @Query("select b from Board b join fetch b.member left join fetch b.imageList where b.store.id = :storeId")
+    List<Board> findByStore(@Param("storeId") Long storeId);
 }

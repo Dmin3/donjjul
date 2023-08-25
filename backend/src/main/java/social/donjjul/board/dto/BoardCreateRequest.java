@@ -8,4 +8,5 @@ import lombok.NoArgsConstructor;
 public class BoardCreateRequest {
     private String title;
     private String content;
+    private Long storeId;
 }

@@ -7,8 +7,8 @@ services:
       MYSQL_DATABASE: donjjul
       MYSQL_ROOT_PASSWORD: donjjul
       TZ: Asia/Seoul
-#    volumes:
-#      - "./init/:/docker-entrypoint-initdb.d/"
+    # volumes:
+    #   - ./db/data:/var/lib/mysql:rw
     ports:
       - "3306:3306"
     restart: always
@@ -16,24 +16,6 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
 
-#version: "3"
-#services:
-#  db:
-#    container_name: donjjul-db
-#    image: mysql
-#    environment:
-#      MYSQL_DATABASE: donjjul
-#      MYSQL_ROOT_PASSWORD: donjjul
-#      TZ: Asia/Seoul
-#    # volumes:
-#    #   - ./db/data:/var/lib/mysql:rw
-#    ports:
-#      - "3306:3306"
-#    restart: always
-#    command:
-#      - --character-set-server=utf8mb4
-#      - --collation-server=utf8mb4_unicode_ci
-#
 #  api:
 #    image: donjjul.kr.ncr.ntruss.com/donjjull-back:1.0
 #    restart: always
@@ -47,3 +29,12 @@ services:
 #      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/donjjul
 #      SPRING_DATASOURCE_USERNAME: root
 #      SPRING_DATASOURCE_PASSWORD: donjjul
+#
+#  node:
+#    container_name: donjjul-front
+#    image: donjjul.kr.ncr.ntruss.com/donjjul-front:0.0.2
+#    ports:
+#      - "3000:3000"
+#    restart: always
+#    environment:
+#      TZ: Asia/Seoul

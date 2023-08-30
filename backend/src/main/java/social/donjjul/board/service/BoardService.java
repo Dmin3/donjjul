@@ -13,6 +13,8 @@ import social.donjjul.likes.domain.Likes;
 import social.donjjul.likes.repository.LikesRepository;
 import social.donjjul.member.domain.Member;
 import social.donjjul.member.repository.MemberRepository;
+import social.donjjul.store.domain.Store;
+import social.donjjul.store.repository.StoreRepository;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class BoardService {
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
     private final LikesRepository likesRepository;
+    private final StoreRepository storeRepository;
 
     public List<BoardResponse> list() {
         List<Board> boardList = boardRepository.findAllByFetchJoin();
@@ -43,12 +46,14 @@ public class BoardService {
 
     public BoardResponse create(Member member, BoardCreateRequest boardCreateRequest) {
         Member findMember = findMember(member.getId());
+        Store store = findStore(boardCreateRequest.getStoreId());
 
         // 게시물 생성
         Board board = Board.builder()
                 .title(boardCreateRequest.getTitle())
                 .content(boardCreateRequest.getContent())
                 .member(findMember)
+                .store(store)
                 .build();
 
         return BoardResponse.of(boardRepository.save(board));
@@ -73,5 +78,9 @@ public class BoardService {
 
     private Member findMember(String memberId) {
         return memberRepository.findById(memberId).orElseThrow();
+    }
+
+    private Store findStore(Long storeId){
+        return storeRepository.findById(storeId).orElseThrow();
     }
 }

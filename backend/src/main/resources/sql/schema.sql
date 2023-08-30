@@ -15,6 +15,25 @@ create table member
     profile_image text         null
 );
 
+create table store
+(
+    id             bigint auto_increment
+        primary key,
+    name           varchar(50)  null,
+    industry_name  varchar(10)  null,
+    city           varchar(255) not null,
+    street_address varchar(255) null,
+    ground_address varchar(255) null,
+    detail_address varchar(255) null,
+    open_time      varchar(255) null,
+    provided_item  varchar(255) null,
+    provided_1     varchar(255) null,
+    provided_2     varchar(255) null,
+    zip_code       varchar(255) null,
+    latitude       double       null,
+    longitude      double       null
+);
+
 create table board
 (
     id          bigint auto_increment
@@ -24,6 +43,9 @@ create table board
     content     text         not null,
     title       varchar(255) not null,
     member_id   varchar(255) null,
+    store_id    bigint       null,
+    constraint FKqrcx4shwcq3xlx22i147o9dps
+        foreign key (store_id) references store (id),
     constraint FKsds8ox89wwf6aihinar49rmfy
         foreign key (member_id) references member (member_id)
 );
@@ -68,24 +90,6 @@ create table comment
         foreign key (member_id) references member (member_id)
 );
 
-create table store
-(
-    id             bigint auto_increment
-        primary key,
-    name           varchar(50)  null,
-    industry_name  varchar(10)  null,
-    city           varchar(255) not null,
-    street_address varchar(255) null,
-    ground_address varchar(255) null,
-    detail_address varchar(255) null,
-    open_time      varchar(255) null,
-    provided_item  varchar(255) null,
-    provided_1     varchar(255) null,
-    provided_2     varchar(255) null,
-    zip_code       varchar(255) null,
-    latitude       double       null,
-    longitude      double       null
-);
 
 
 

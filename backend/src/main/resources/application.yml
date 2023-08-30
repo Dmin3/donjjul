@@ -1,8 +1,8 @@
 spring:
   sql:
     init:
-#      data-locations: classpath:sql/schema.sql
-#      mode: always
+      data-locations: classpath:sql/schema.sql
+      mode: always
 
   datasource:
     url: jdbc:mysql://localhost:3306/donjjul

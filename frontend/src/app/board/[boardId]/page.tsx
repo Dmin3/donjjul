@@ -6,7 +6,7 @@ import BoardComment from '@/components/board/BoardComment';
 
 const BoardDetailPage = () => {
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: '100%', backgroundColor: '#f7f7f7' }}>
       <Header />
 
       <BoardDetail />

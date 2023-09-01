@@ -5,7 +5,7 @@ import StoreDetail from '@/components/store/StoreDetail';
 
 const StoreDetailPage = () => {
   return (
-    <div>
+    <div style={{ width: '100%', height: '100%' }}>
       <Header />
 
       <StoreDetail />

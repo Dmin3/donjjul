@@ -34,10 +34,10 @@ const Header = () => {
       <LogoBox onClick={() => router.push('/')}>로고</LogoBox>
 
       <MenuBox>
-        <MenuName onClick={() => router.push('/board')}>홍보 가게</MenuName>
         <MenuName onClick={() => router.push('/store')}>
           선한 영향력 가게
         </MenuName>
+        <MenuName onClick={() => router.push('/board')}>홍보 가게</MenuName>
       </MenuBox>
 
       {myInfo ? (

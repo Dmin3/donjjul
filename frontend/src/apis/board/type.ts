@@ -1,6 +1,9 @@
+import { IGetStore } from '../store/type';
+
 export interface ICreateBoardReq {
   title: string;
   content: string;
+  storeId: string;
 }
 
 export interface ICreateBoardRes {
@@ -34,6 +37,7 @@ export interface IGetDetailBoardRes {
     imageUrl: string;
     priority: number;
   }[];
+  storeInfo: IGetStore;
 }
 
 export interface IGetBoardList {

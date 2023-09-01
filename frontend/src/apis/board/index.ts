@@ -27,10 +27,12 @@ export const getBoardList = async (): Promise<IGetBoardListRes> => {
 export const createBoard = async ({
   title,
   content,
+  storeId,
 }: ICreateBoardReq): Promise<ICreateBoardRes> => {
   const { data } = await axios.post(`/board`, {
     title,
     content,
+    storeId,
   });
 
   return data;

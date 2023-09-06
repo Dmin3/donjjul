@@ -11,7 +11,8 @@ export default function Home() {
     <main
       style={{
         width: '100%',
-        height: '100vh',
+        height: '100%',
+        backgroundColor: '#fafafa',
       }}
     >
       <Header />

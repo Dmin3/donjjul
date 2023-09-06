@@ -30,7 +30,16 @@ const StoreDetail = () => {
         </CreateButton>
 
         <StoreInfoBox>
-          <Title>{storeDetail?.name}</Title>
+          <Title>가게 정보</Title>
+
+          <Line />
+
+          <StoreInfo>가게명 : {storeDetail?.name}</StoreInfo>
+          <StoreInfo>주소 : {storeDetail?.streetAddress}</StoreInfo>
+          <StoreInfo>상세 주소 : {storeDetail?.detailAddress}</StoreInfo>
+          <StoreInfo>산업군 : {storeDetail?.industryName}</StoreInfo>
+          <StoreInfo>영업 시간 : {storeDetail?.openTime}</StoreInfo>
+          <StoreInfo>제공 대상 : {storeDetail?.provided_2}</StoreInfo>
         </StoreInfoBox>
       </CenterBox>
     </StoreDetailBlock>
@@ -75,7 +84,7 @@ const CreateButton = styled.div`
 
 const StoreInfoBox = styled.div`
   width: 70rem;
-  height: 20rem;
+  height: 25rem;
   background-color: #fff;
   margin-top: 2rem;
   border: 1px solid #eaeaea;
@@ -84,11 +93,30 @@ const StoreInfoBox = styled.div`
 `;
 
 const Title = styled.h4`
+  font-size: 1.3rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #333;
+`;
+
+const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: #eaeaea;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+`;
+
+const StoreInfo = styled.h4`
   font-size: 1.2rem;
-  font-weight: normal;
+  font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.33;
   letter-spacing: normal;
   color: #191919;
+  margin-top: 1rem;
 `;

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 
 import styled from 'styled-components';
@@ -17,7 +17,9 @@ const CreateBoard = () => {
   const [imgFile, setImgFile] = useState<any>([]);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
   const queryClient = useQueryClient();
+  const storeId = String(searchParams.get('ref'));
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -42,7 +44,7 @@ const CreateBoard = () => {
   );
 
   const mutationCreateBoard = useMutation(
-    () => createBoard({ title, content }),
+    () => createBoard({ title, content, storeId }),
     {
       onSuccess: (data) => {
         if (imgFile) {

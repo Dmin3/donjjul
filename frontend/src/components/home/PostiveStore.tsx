@@ -32,7 +32,11 @@ const PostiveStore = () => {
         >
           {postiveStoreData?.map((data) => (
             <Link href={`/store/${String(data.id)}`} key={data.id}>
-              <PostiveStoreCard />
+              <PostiveStoreCard>
+                <StoreName>가게명 : {data.name}</StoreName>
+
+                <StoreInfo>제공대상 : {data.provided_2}</StoreInfo>
+              </PostiveStoreCard>
             </Link>
           ))}
         </Slick>
@@ -69,6 +73,28 @@ const ContentSection = styled.section`
 const PostiveStoreCard = styled.div`
   width: 15rem;
   height: 20rem;
-  background-color: salmon;
-  border-right: 1px solid #eaeaea;
+  border: 1px solid #eaeaea;
+  border-radius: 15px;
+  padding: 1rem;
+`;
+
+const StoreName = styled.h4`
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #191919;
+`;
+
+const StoreInfo = styled.h4`
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #191919;
+  margin-top: 1rem;
 `;

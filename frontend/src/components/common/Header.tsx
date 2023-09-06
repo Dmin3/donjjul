@@ -31,13 +31,13 @@ const Header = () => {
 
   return (
     <HeaderBlock>
-      <LogoBox onClick={() => router.push('/')}>로고</LogoBox>
+      <LogoBox onClick={() => router.push('/')}>돈쭐</LogoBox>
 
       <MenuBox>
-        <MenuName onClick={() => router.push('/board')}>홍보 가게</MenuName>
         <MenuName onClick={() => router.push('/store')}>
           선한 영향력 가게
         </MenuName>
+        <MenuName onClick={() => router.push('/board')}>홍보 가게</MenuName>
       </MenuBox>
 
       {myInfo ? (
@@ -72,22 +72,23 @@ const HeaderBlock = styled.header`
   top: 0;
   padding-left: 13rem;
   padding-right: 13rem;
+  z-index: 15;
 `;
 
 const LogoBox = styled.div`
   width: 9rem;
   height: 4rem;
-  background-color: pink;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-size: 2rem;
+  font-weight: 500;
 `;
 
 const MenuBox = styled.div`
   width: 15rem;
   height: 4rem;
-  background-color: skyblue;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -95,6 +96,10 @@ const MenuBox = styled.div`
 `;
 
 const MenuName = styled.span`
+  width: fit-content;
+  height: 3rem;
+  display: flex;
+  align-items: center;
   font-size: 1rem;
   font-weight: bold;
   font-stretch: normal;
@@ -103,6 +108,11 @@ const MenuName = styled.span`
   letter-spacing: -0.24px;
   color: #191919;
   cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    border-bottom: 3px solid #191919;
+  }
 `;
 
 const LoginSpan = styled.span`
